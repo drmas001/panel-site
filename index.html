@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel Board Revision — Internal medicine, offline</title>
+<meta name="description" content="Ten internal-medicine specialties in one app that works offline: lectures, questions, cards, rapid review and mnemonics. Everything is open for your first 7 days.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F5F7FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1626" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://drmas001.github.io/panel-site/">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Panel Board Revision — Internal medicine, offline">
+<meta property="og:description" content="Ten internal-medicine specialties in one app that works offline. Everything is open for your first 7 days.">
+<meta property="og:url" content="https://drmas001.github.io/panel-site/">
+<meta property="og:image" content="https://drmas001.github.io/panel-site/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Panel Board Revision: internal medicine, offline, beside the app's Home screen on an iPhone.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Inter (SIL Open Font License 1.1, fonts/OFL.txt): a Latin subset, weights 400-700, served from this site. */
+@font-face{font-family:"Inter";src:url("fonts/inter-latin.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107.4%;ascent-override:90.2%;descent-override:22.5%;line-gap-override:0%}
+
+:root{
+  --paper:#F5F7FB;--raised:#FFFFFF;--ink:#0E1526;--ink2:#4A5568;--accent:#1C6BF0;--check:#0F8F7C;
+  --hair:rgba(14,21,38,.08);
+  --tint:linear-gradient(135deg,rgba(43,76,255,.06),rgba(31,214,184,.06));
+  --grad:linear-gradient(135deg,#2B4CFF 0%,#1C8CF0 50%,#1FD6B8 100%);
+  --shadow:0 8px 24px rgba(14,21,38,.12);
+  --frame:linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,255,255,.4));
+  --glow:radial-gradient(60% 55% at 85% 0%,rgba(28,140,240,.14),transparent 70%);
+  --rule-mix:0%;
+  --r-control:14px;--r-card:20px;--r-sheet:28px;
+  --gutter:16px;--measure:1100px;
+  --sans:"Inter","Inter Fallback",-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0E1626;--raised:#131D30;--ink:#F2F5FA;--ink2:#A9B4C6;--accent:#5B9BFF;--check:#2FE0C0;
+    --hair:rgba(255,255,255,.10);
+    --shadow:0 8px 24px rgba(0,0,0,.4);
+    --frame:linear-gradient(145deg,rgba(255,255,255,.4),rgba(255,255,255,.1));
+    --glow:radial-gradient(60% 55% at 85% 0%,rgba(28,140,240,.22),transparent 70%);
+    --rule-mix:45%;
+  }
+  html{background:linear-gradient(180deg,#0E1626,#0B2530) no-repeat;background-color:#0E1626}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background-color:var(--paper)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--glow) top center/100% 800px no-repeat;color:var(--ink);font:400 1.0625rem/1.5 var(--sans);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+h1,h2,h3{text-wrap:balance}
+p,li{text-wrap:pretty}
+ul,ol{padding:0;list-style:none}
+a{color:var(--ink);text-underline-offset:.2em}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.faq summary:focus-visible,.shots:focus-visible{outline-offset:-3px}
+.skip{position:absolute;left:var(--gutter);top:-80px;background:var(--raised);color:var(--ink);padding:12px 16px;border-radius:var(--r-control);z-index:10;font-weight:600}
+.skip:focus{top:12px}
+.wrap{width:100%;max-width:calc(var(--measure) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+@media (min-width:640px){:root{--gutter:24px}}
+@media (min-width:1024px){:root{--gutter:32px}}
+
+/* header: the lockup, then the page's own sections */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 16px;min-height:72px}
+.brand{display:flex;align-items:center;gap:24px;color:var(--ink);text-decoration:none;min-height:44px}
+.brand img{width:48px;height:48px;border-radius:22.37%}
+.brand span{font-size:1.5rem;font-weight:600;letter-spacing:-.02em}
+.nav{display:flex;align-items:center;gap:4px;font-size:.9375rem;font-weight:500}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:var(--r-control);color:var(--ink);text-decoration:none}
+.nav a:hover{background:var(--hair)}
+.nav a:not(.keep){display:none}
+@media (min-width:640px){.nav a:not(.keep){display:inline-flex}}
+
+/* buttons: one primary per screen, the pure brand gradient with a white label (BRAND 4.3) */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:var(--r-control);background:var(--grad);color:#fff;font:600 1.0625rem/1.2 var(--sans);text-decoration:none;text-align:center}
+.btn:active{transform:scale(.97);filter:brightness(.94)}
+.btn:focus-visible{outline-color:var(--ink)}
+
+/* hero */
+.hero{padding:24px 0 56px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
+.hero h1{font-size:clamp(2.5rem,10.5vw,4.5rem);line-height:1.02;font-weight:700;letter-spacing:-.03em}
+.hero .sub{margin-top:16px;font-size:clamp(1.375rem,5vw,1.875rem);line-height:1.2;font-weight:500;letter-spacing:-.015em}
+.hero .trial{margin-top:16px;color:var(--ink2);font-size:1.1875rem;max-width:34ch}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:32px}
+.cta small{color:var(--ink2);font-size:.9375rem}
+.pending{display:none;margin-top:12px;color:var(--ink2);font-size:.9375rem;max-width:46ch}
+.pending:target{display:block}
+.close .pending{margin-inline:auto}
+.stage{position:relative;overflow:hidden;border-radius:var(--r-sheet);background:var(--grad);height:clamp(420px,112vw,520px);padding-top:40px}
+.stage .frame{margin:0 auto}
+@media (min-width:900px){
+  .hero{padding:48px 0 88px}
+  .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:56px}
+  .stage{height:580px}
+}
+
+/* a phone: the screenshot inside a glass frame, radius from the picture's own width */
+.frame{--w:260px;--r:calc(var(--w)*.135);width:calc(var(--w) + 12px);padding:6px;border-radius:calc(var(--r) + 6px);background:var(--frame);box-shadow:var(--shadow)}
+.frame img{width:var(--w);border-radius:var(--r);background:var(--raised)}
+.stage .frame{--w:min(280px,68vw)}
+
+/* sections */
+section{padding:56px 0}
+@media (min-width:900px){section{padding:72px 0}}
+h2{font-size:clamp(1.875rem,6vw,2.75rem);line-height:1.1;font-weight:700;letter-spacing:-.025em}
+.lead{margin-top:12px;color:var(--ink2);font-size:1.1875rem;max-width:56ch}
+h3{font-size:1.25rem;line-height:1.25;font-weight:600;letter-spacing:-.01em}
+.card{background:var(--tint),var(--raised);border-radius:var(--r-card);box-shadow:0 0 0 1px var(--hair)}
+
+/* what's inside */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr));gap:12px;margin-top:32px}
+.stats li{padding:20px}
+@media (max-width:639px){.stats li:last-child{grid-column:1/-1}}
+.num{display:block;font-size:2.25rem;line-height:1.1;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.lbl{display:block;margin-top:4px;font-weight:600}
+.tag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--ink);font-size:.8125rem;font-weight:500;line-height:1.4;vertical-align:.1em}
+.desc{display:block;margin-top:4px;color:var(--ink2);font-size:.9375rem;line-height:1.4}
+@media (min-width:900px){.stats{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.specs{margin-top:48px}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px;margin-top:16px}
+.spec-grid li{position:relative;padding:16px 16px 16px 24px;overflow:hidden}
+.spec-grid li::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:color-mix(in srgb,var(--a) calc(100% - var(--rule-mix)),#fff)}
+.nm{display:block;font-weight:600}
+.mt{display:block;margin-top:2px;color:var(--ink2);font-size:.9375rem;font-variant-numeric:tabular-nums}
+.also{margin-top:32px;color:var(--ink2);max-width:70ch}
+
+/* how it works */
+.steps{counter-reset:s;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:32px}
+.steps li{counter-increment:s;position:relative;display:flex;flex-direction:column;padding:20px 20px 20px 72px}
+.steps li::before{content:counter(s);position:absolute;left:20px;top:20px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.steps p{margin-top:6px;color:var(--ink2)}
+.steps .plan{margin-top:auto;padding-top:12px;font-size:.9375rem;font-weight:500;color:var(--ink)}
+.loop{margin-top:20px;color:var(--ink2)}
+@media (min-width:900px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}.steps li{padding:72px 20px 24px}.steps li::before{top:20px}}
+
+/* pricing */
+.trialbox{margin-top:32px;padding:20px 20px 20px 24px;position:relative;overflow:hidden}
+.trialbox::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad)}
+.trialbox p{max-width:68ch}
+.trialbox strong{display:block;font-size:1.25rem;font-weight:600;margin-bottom:4px}
+.plans{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:16px}
+.plan-card{padding:24px}
+.plan-card h3{font-size:1.5rem}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin-top:12px}
+.price .num{font-size:2.5rem}
+.price span:last-child{color:var(--ink2)}
+.plan-card .sum{margin-top:4px;color:var(--ink2)}
+.plan-card .more{margin-top:16px;color:var(--ink2);font-size:.9375rem}
+.ticks{margin-top:20px;display:grid;gap:10px}
+.ticks li{position:relative;padding-left:30px}
+.ticks li::before{content:"";position:absolute;left:0;top:.2em;width:20px;height:20px;border-radius:50%;background:color-mix(in srgb,var(--check) 16%,transparent)}
+.ticks li::after{content:"";position:absolute;left:7px;top:calc(.2em + 4px);width:5px;height:9px;border:solid var(--check);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.fine{margin-top:20px;color:var(--ink2);font-size:.9375rem;max-width:76ch}
+.fine + .fine{margin-top:8px}
+@media (min-width:760px){.plans{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* screenshots */
+.shots{display:flex;gap:16px;margin:32px calc(-1*var(--gutter)) 0;padding:4px var(--gutter) 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);overscroll-behavior-x:contain}
+.shots figure{flex:0 0 auto;scroll-snap-align:start}
+.shots .frame{--w:220px}
+.shots figcaption{margin-top:12px;width:232px;color:var(--ink2);font-size:.9375rem;line-height:1.4}
+.shots figcaption b{display:block;color:var(--ink);font-weight:600;font-size:1rem}
+@media (min-width:1080px){
+  .shots{display:grid;grid-template-columns:repeat(5,1fr);overflow:visible;margin-inline:0;padding-inline:0}
+  .shots .frame{--w:min(100%,196px)}
+  .shots .frame{width:auto;max-width:208px}
+  .shots figcaption{width:auto}
+}
+
+/* faq */
+.faq{margin-top:32px;border-radius:var(--r-card);background:var(--tint),var(--raised);box-shadow:0 0 0 1px var(--hair);overflow:hidden}
+.faq details+details{border-top:1px solid var(--hair)}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:12px 20px;cursor:pointer;font-weight:600;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:10px;height:10px;border:solid var(--ink2);border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(225deg) translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.faq summary::after{transition:none}}
+.faq .ans{padding:0 20px 20px;color:var(--ink2);max-width:72ch}
+.faq .ans p+p{margin-top:10px}
+
+/* closing call, footer */
+.close{padding:0 0 72px}
+.close .card{padding:32px 24px;text-align:center}
+.close h2{font-size:clamp(1.625rem,5vw,2.25rem)}
+.close p{margin:8px auto 0;color:var(--ink2);max-width:46ch}
+.close .cta{justify-content:center}
+footer{border-top:1px solid var(--hair);padding:32px 0 48px;color:var(--ink2);font-size:.9375rem}
+.foot{display:grid;gap:20px}
+.foot nav{display:flex;flex-wrap:wrap;gap:4px 8px}
+.foot nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px 0 0;color:var(--ink);font-weight:500}
+.foot p{max-width:70ch}
+.legal{font-size:.875rem}
+@media (min-width:760px){.foot{grid-template-columns:1fr auto;align-items:center}.foot .wide{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap top">
+    <a class="brand" href="./" aria-label="Panel Board Revision, home"><img src="img/icon-96.png" srcset="img/icon-96.png 2x, img/icon-144.png 3x" width="48" height="48" alt=""><span>Panel</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#inside">What’s inside</a>
+      <a href="#how">How it works</a>
+      <a class="keep" href="#pricing">Pricing</a>
+      <a href="#faq">Common questions</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Panel Board Revision</h1>
+      <p class="sub">Internal medicine, offline</p>
+      <p class="trial">Try everything free for 7 days. No purchase, nothing charged.</p>
+      <div class="cta">
+        <a class="btn" href="#store-pending-hero" data-store-link="pending">Download on the App Store</a>
+        <small>For iPhone</small>
+      </div>
+      <p class="pending" id="store-pending-hero" role="status" tabindex="-1">Panel is not on the App Store yet. This button will open its page there when version 1.0 is released.</p>
+    </div>
+    <div class="stage">
+      <div class="frame">
+        <img src="img/01-home-720.webp" srcset="img/01-home-480.webp 480w, img/01-home-720.webp 720w" sizes="(min-width:412px) 280px, 68vw" width="720" height="1565" alt="Panel’s Home screen on an iPhone" fetchpriority="high">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="inside" aria-labelledby="inside-h">
+  <div class="wrap">
+    <h2 id="inside-h">What’s inside</h2>
+    <p class="lead">Panel is a revision app for doctors preparing for internal-medicine board exams. Ten specialties are taught and tested in one app that works without a connection, with no account and no sign-in.</p>
+
+    <ul class="stats">
+      <li class="card"><span class="num">150</span><span class="lbl">Lectures</span><span class="desc">Every module is a guided lesson.</span></li>
+      <li class="card"><span class="num">2,571</span><span class="lbl">Questions</span><span class="desc">Five options, one answer and a full explanation.</span></li>
+      <li class="card"><span class="num">2,405</span><span class="lbl">Cards <span class="tag">Plus</span></span><span class="desc">Spaced repetition that schedules itself.</span></li>
+      <li class="card"><span class="num">2,603</span><span class="lbl">Rapid-review facts <span class="tag">Plus</span></span><span class="desc">The one-line facts worth reading the night before.</span></li>
+      <li class="card"><span class="num">159</span><span class="lbl">Mnemonics <span class="tag">Plus</span></span><span class="desc">Each one is a card to mark as learned.</span></li>
+    </ul>
+    <p class="fine">Counts marked Plus come with Plus. The rest come with both plans.</p>
+
+    <div class="specs">
+      <h3>The ten specialties</h3>
+      <ul class="spec-grid">
+        <li class="card" style="--a:#9f1239"><span class="nm">Cardiology</span><span class="mt">16 lectures · 272 questions</span></li>
+        <li class="card" style="--a:#786600"><span class="nm">Endocrinology</span><span class="mt">17 lectures · 252 questions</span></li>
+        <li class="card" style="--a:#5a004b"><span class="nm">Gastroenterology</span><span class="mt">16 lectures · 249 questions</span></li>
+        <li class="card" style="--a:#1E3A8A"><span class="nm">General Medicine</span><span class="mt">14 lectures · 226 questions</span></li>
+        <li class="card" style="--a:#8E44AD"><span class="nm">Haematology &amp; Oncology</span><span class="mt">15 lectures · 419 questions</span></li>
+        <li class="card" style="--a:#15803D"><span class="nm">Infectious Diseases</span><span class="mt">15 lectures · 259 questions</span></li>
+        <li class="card" style="--a:#00604b"><span class="nm">Nephrology</span><span class="mt">13 lectures · 180 questions</span></li>
+        <li class="card" style="--a:#5400c4"><span class="nm">Neurology</span><span class="mt">13 lectures · 241 questions</span></li>
+        <li class="card" style="--a:#0E7C86"><span class="nm">Respiratory &amp; Critical Care</span><span class="mt">15 lectures · 268 questions</span></li>
+        <li class="card" style="--a:#b45309"><span class="nm">Rheumatology</span><span class="mt">16 lectures · 205 questions</span></li>
+      </ul>
+      <p class="also">Also in the app: progress by specialty, with your streak; light and dark appearance, adjustable text size and a serif reading theme; and an optional daily reminder for your cards. Search covers lectures, questions, cards, rapid review, mnemonics and figures, and a result never gives away an answer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <h2 id="how-h">How it works</h2>
+    <p class="lead">Lecture, questions, cards, then back to the topic that needs it.</p>
+    <ol class="steps">
+      <li class="card">
+        <h3>Read the lecture</h3>
+        <p>The case first, your answer, then the explanation. Each page carries its tables and figures. Press and hold any passage to highlight it or write a note.</p>
+        <p class="plan">Pro and Plus</p>
+      </li>
+      <li class="card">
+        <h3>Answer the questions</h3>
+        <p>Practise by module, with the answer and its explanation straight after each question. Every sitting ends with your score and the questions you missed. Sit a timed exam of up to 40 questions, 90 seconds each.</p>
+        <p class="plan">Practice on Pro and Plus; the exam simulator on Plus</p>
+      </li>
+      <li class="card">
+        <h3>Review the cards</h3>
+        <p>Choose how many new cards a day. Set your exam date, and any card that would fall due after the exam is scheduled shortly before it instead.</p>
+        <p class="plan">Plus</p>
+      </li>
+      <li class="card">
+        <h3>Go back to your weakest topic</h3>
+        <p>Once you have answered enough questions in a week, Home names the weakest topic and opens its lesson. Weak topics builds a set of questions from where you are weakest.</p>
+        <p class="plan">Plus</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="pricing" aria-labelledby="pricing-h">
+  <div class="wrap">
+    <h2 id="pricing-h">Pricing</h2>
+    <p class="lead">Start with 7 days of everything. Then choose Pro or Plus; both cover all ten specialties.</p>
+
+    <div class="trialbox card">
+      <strong>Free for your first 7 days</strong>
+      <p>Everything is open. The trial starts when you first open Panel, lasts seven calendar days, needs no purchase, charges nothing and does not turn into a subscription. If you subscribe during it, the plan starts, and is charged, at once.</p>
+    </div>
+
+    <div class="plans">
+      <article class="plan-card card">
+        <h3>Pro</h3>
+        <p class="price"><span class="num">149 SAR</span><span>a month</span></p>
+        <p class="sum">Lectures, Question Bank, notes and Progress.</p>
+        <ul class="ticks">
+          <li>Lectures</li>
+          <li>Question Bank</li>
+          <li>Personal notes</li>
+          <li>Progress</li>
+        </ul>
+        <p class="more">Plus adds the exam simulator, Cards, Mnemonics, Rapid review and Weak topics.</p>
+      </article>
+      <article class="plan-card card">
+        <h3>Plus</h3>
+        <p class="price"><span class="num">249 SAR</span><span>a month</span></p>
+        <p class="sum">Everything, with the exam simulator and Cards.</p>
+        <ul class="ticks">
+          <li>Everything in Pro</li>
+          <li>Exam simulator</li>
+          <li>Cards</li>
+          <li>Mnemonics</li>
+          <li>Rapid review</li>
+          <li>Weak topics</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="fine">Search is open to everyone, with or without a plan; a result opens when your plan carries what it points to.</p>
+    <p class="fine">Pro and Plus are monthly subscriptions that renew automatically; there is no one-time purchase. Prices are in Saudi riyals (SAR); the App Store shows the exact price for your country in the app before you subscribe. Payment is charged to your Apple Account when you confirm the purchase. Cancel at any time in your Apple Account’s subscriptions, at least 24 hours before the month ends to avoid the next charge. See the <a href="terms.html">Terms</a> for the details.</p>
+  </div>
+</section>
+
+<section id="screens" aria-labelledby="screens-h">
+  <div class="wrap">
+    <h2 id="screens-h">Screenshots</h2>
+    <p class="lead">Five screens from the app. Where a screen shows something that comes with Plus, its caption says so.</p>
+    <div class="shots" role="region" aria-label="Five app screenshots" tabindex="0">
+      <figure>
+        <div class="frame"><img src="img/01-home-480.webp" srcset="img/01-home-480.webp 480w, img/01-home-720.webp 720w" sizes="220px" width="480" height="1043" loading="lazy" decoding="async" alt="Panel’s Home screen: a Practice card with a Continue button, the cards due today, the week’s weakest topic and a progress ring."></div>
+        <figcaption><b>Home</b>Where you left off. The cards due and the weakest topic come with Plus.</figcaption>
+      </figure>
+      <figure>
+        <div class="frame"><img src="img/02-lecture-480.webp" srcset="img/02-lecture-480.webp 480w, img/02-lecture-720.webp 720w" sizes="220px" width="480" height="1043" loading="lazy" decoding="async" alt="A lecture page: the lecture title, a topic heading and the first paragraph of teaching text, with the next card starting at the bottom edge."></div>
+        <figcaption><b>A lecture</b>Teaching text, with the module’s questions on the same page.</figcaption>
+      </figure>
+      <figure>
+        <div class="frame"><img src="img/03-question-reveal-480.webp" srcset="img/03-question-reveal-480.webp 480w, img/03-question-reveal-720.webp 720w" sizes="220px" width="480" height="1043" loading="lazy" decoding="async" alt="A practice question after answering: the correct option marked among five, the start of the explanation and a Next button."></div>
+        <figcaption><b>A question</b>Five options, then the answer and its explanation.</figcaption>
+      </figure>
+      <figure>
+        <div class="frame"><img src="img/04-summary-480.webp" srcset="img/04-summary-480.webp 480w, img/04-summary-720.webp 720w" sizes="220px" width="480" height="1043" loading="lazy" decoding="async" alt="The Practice complete screen: a score ring at 88 per cent, tiles for answered, correct, wrong, unanswered and time, and a concept to review."></div>
+        <figcaption><b>A summary</b>Your score and what you missed. The concepts most often wrong come with Plus.</figcaption>
+      </figure>
+      <figure>
+        <div class="frame"><img src="img/05-cards-480.webp" srcset="img/05-cards-480.webp 480w, img/05-cards-720.webp 720w" sizes="220px" width="480" height="1043" loading="lazy" decoding="async" alt="A card showing its front: a clinical question in the centre and a Show answer button below."></div>
+        <figcaption><b>A card</b>One question on the front; turn it to check yourself. Cards come with Plus.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <h2 id="faq-h">Common questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Does Panel work offline?</summary>
+        <div class="ans"><p>Yes. Everything you study is inside the app, so it works without a connection. You need one only to subscribe or restore a purchase.</p></div>
+      </details>
+      <details>
+        <summary>Do I need an account?</summary>
+        <div class="ans"><p>No. There is no account and no sign-in. Your answers, notes and progress stay on your iPhone. The <a href="privacy.html">Privacy Policy</a> says what is kept and what leaves your device.</p></div>
+      </details>
+      <details>
+        <summary>How does the free trial work?</summary>
+        <div class="ans"><p>Everything is open for seven calendar days from the first time you open Panel, counted on your device. It needs no purchase, charges nothing and does not turn into a subscription. If you subscribe during the trial, the plan starts, and is charged, at once, and the trial’s remaining days stay open.</p><p>When the trial ends, only Search stays open until you choose a plan, and a result opens only if your plan carries it. The trial is counted once: reinstalling Panel does not start it again.</p></div>
+      </details>
+      <details>
+        <summary>Can I cancel at any time?</summary>
+        <div class="ans"><p>Yes. Manage or cancel in your Apple Account’s subscriptions (Settings, your name, Subscriptions), or from Manage subscription in Panel. To avoid the next charge, cancel at least 24 hours before the current month ends. The month you have paid for stays open until it ends. Refunds are Apple’s, under Apple’s policies.</p></div>
+      </details>
+      <details>
+        <summary>Can I move between Pro and Plus?</summary>
+        <div class="ans"><p>Yes. Moving from Pro to Plus starts Plus at once; moving from Plus to Pro starts Pro when the Plus month ends.</p></div>
+      </details>
+      <details>
+        <summary>Which devices does it run on?</summary>
+        <div class="ans"><p>Panel is made for iPhone and needs iOS 17 or later; hold it upright. On an iPad it runs as an iPhone app. A version made for iPad, with syncing between devices, is planned for 1.1. To move to a new iPhone, set it up from a backup of the old one and your progress comes with it.</p></div>
+      </details>
+      <details>
+        <summary>Which specialties does it cover?</summary>
+        <div class="ans"><p>Ten: Cardiology, Endocrinology, Gastroenterology, General Medicine, Haematology &amp; Oncology, Infectious Diseases, Nephrology, Neurology, Respiratory &amp; Critical Care and Rheumatology. Every specialty is on either plan.</p></div>
+      </details>
+      <details>
+        <summary>Is it for patient care?</summary>
+        <div class="ans"><p>No. Panel is a revision aid for a professional exam. It is not medical advice and is not a substitute for clinical judgement, current guidelines or a drug’s prescribing information.</p></div>
+      </details>
+      <details>
+        <summary>I think a question or answer is wrong. What do I do?</summary>
+        <div class="ans"><p>Tell us on the <a href="support.html">support page</a>: send the specialty and the first words of the question. A screenshot of the question and its explanation helps.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="close">
+  <div class="wrap">
+    <div class="card">
+      <h2>Open everything for 7 days</h2>
+      <p>Ten specialties, one app, no connection needed.</p>
+      <div class="cta">
+        <a class="btn" href="#store-pending-close" data-store-link="pending">Download on the App Store</a>
+      </div>
+      <p class="pending" id="store-pending-close" role="status" tabindex="-1">Panel is not on the App Store yet. This button will open its page there when version 1.0 is released.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <nav aria-label="Legal and support">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+    <p>Panel Board Revision. For revision, not for patient care.</p>
+    <p class="legal wide">iPhone is a trademark of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc., registered in the U.S. and other countries and regions.</p>
+  </div>
+</footer>
+</body>
+</html>
